@@ -525,8 +525,16 @@ def initialize_libhotwater():
     libhotwater.hot_water_decrypt_buffer.restype = None
 
 if __name__ == "__main__":
-    initialize_libahff()
-    initialize_libhotwater()
+    try:
+        initialize_libahff()
+    except OSError as e:
+        print("warning: libahff not initialized,", str(e))
+
+    try:
+        initialize_libhotwater()
+    except OSError as e:
+        print("warning: libhotwater not initialized,", str(e))
+
     assets = open_bundle(sys.argv[1])
 
     for o in assets:
